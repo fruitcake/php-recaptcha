@@ -34,6 +34,9 @@ class ReCaptcha {
     /** @var array Errors when available */
     protected $errors = array();
 
+    /** @var  Request $request */
+    protected $request;
+
     /**
      * @param  string $siteKey
      * @param  string $secret
@@ -74,6 +77,16 @@ class ReCaptcha {
     public function getLang()
     {
         return $this->lang;
+    }
+
+    /**
+     * Set the Request to use in the verifyRequest() call
+     * 
+     * @param Request $request
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
     }
 
     /*
@@ -173,8 +186,9 @@ class ReCaptcha {
      * @param  \Symfony\Component\HttpFoundation\Request $request
      * @return bool
      */
-    public function verifyRequest(Request $request)
+    public function verifyRequest(Request $request = null)
     {
+        $request = $request ?: $this->request;
         $response = $request->request->get('g-recaptcha-response');
         $remoteip = $request->getClientIp();
 

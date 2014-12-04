@@ -60,10 +60,16 @@ if ($captcha->verifyGlobals()) {
 }
 ```
 
-If you are using Symfony HttpFoundation, you can use the Request object instead of the globals:
+If you are using Symfony HttpFoundation, you can use the Request object instead of the globals.
 
 ```php
 if ($captcha->verifyRequest($request)) {
+    echo "OK!";
+}
+
+// Or by setting the request before
+$captcha->setRequest($request);
+if ($captcha->verifyRequest()) {
     echo "OK!";
 }
 ```
