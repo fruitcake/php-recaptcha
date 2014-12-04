@@ -18,8 +18,12 @@
             "FruitcakeStudio\\ReCaptcha\\": "src/"
         }
     },
+    "require-dev": {
+        "laravel/support": "4.2.x"
+    },
     "suggest": {
-         "symfony/http-foundation": "To use the Request object instead of globals"
+         "symfony/http-foundation": "To use the Request object instead of globals",
+         "laravel/support": "To use Laravel integration"
     },
     "extra": {
         "branch-alias": {

@@ -19,7 +19,7 @@ You can get that at https://www.google.com/recaptcha/admin
 ```php
 use FruitcakeStudio\ReCaptcha\ReCaptcha;
 
-$captcha = new ReCaptcha($siteKey, $secret);
+$captcha = new ReCaptcha($siteKey, $secret, 'en');
 ```
 
 ## Widget usage
@@ -27,7 +27,7 @@ $captcha = new ReCaptcha($siteKey, $secret);
 To show the reCAPTCHA on a form, use the class to render the script tag and the widget.
 
 ```php
-<?php echo $captcha->getScript('nl') ?>
+<?php echo $captcha->getScript() ?>
 <form method="POST">
     <?php echo $captcha->getWidget() ?>
     <input type="submit" value="Submit" />
@@ -75,3 +75,37 @@ if ($captcha->verifyRequest()) {
 ```
 
 See the docs on https://developers.google.com/recaptcha/docs/verify
+
+## Laravel integration
+
+You can use the Laravel ServiceProvider to make use of the Laravel Configuration and Request object.
+
+Add the ServiceProvider to your list of ServiceProviders:
+
+```
+'FruitcakeStudio\ReCaptcha\Support\Laravel\ServiceProvider',
+```
+
+Publish the Configuration and edit the sitekey, secret and language.
+
+```
+php artisan config:publish fruitcakestudio/recaptcha
+```
+
+If you want to use the Facade, add that too.
+
+```
+'ReCaptcha' => 'FruitcakeStudio\ReCaptcha\Support\Laravel\Facade',
+```
+
+This will register the ReCaptcha instance, preconfigured with your configuration and the Request object.
+
+```php
+// Using the IoC container
+$captcha = App::make('recaptcha');
+$captcha->getScript();
+
+// Using the Facade
+ReCaptcha::verifyRequest();
+```
+
