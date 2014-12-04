@@ -39,6 +39,11 @@ class ServiceProvider extends BaseServiceProvider {
                 return $reCaptcha;
             }
         );
+        
+        $app['validator']->extend('recaptcha', function($attribute, $value, $parameters) use ($app) {
+                $remoteip = $app['request']->getClientIp();
+                return $app['recaptcha']->verify($value, $remoteip);
+            });
     }
 
     /**

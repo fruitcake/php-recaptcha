@@ -109,3 +109,11 @@ $captcha->getScript();
 ReCaptcha::verifyRequest();
 ```
 
+You can also add the ReCaptcha as a rule to the validator:
+
+```php
+$validator = Validator::make(Input::all(), array(
+    'g-recaptcha-response' => 'required|recaptcha'
+));
+```
+
