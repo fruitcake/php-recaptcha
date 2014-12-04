@@ -1,6 +1,6 @@
 <?php
 
-namespace FruitcakeStudio;
+namespace FruitcakeStudio\ReCaptcha;
 
 use Symfony\Component\HttpFoundation\Request;
 

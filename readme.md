@@ -17,7 +17,7 @@ You can create a new instance by passing the SiteKey and Secret from your API.
 You can get that at https://www.google.com/recaptcha/admin
 
 ```php
-use FruitcakeStudio\ReCaptcha;
+use FruitcakeStudio\ReCaptcha\ReCaptcha;
 
 $captcha = new ReCaptcha($siteKey, $secret);
 ```

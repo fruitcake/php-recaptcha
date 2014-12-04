@@ -15,7 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "FruitcakeStudio\\": "src/"
+            "FruitcakeStudio\\ReCaptcha\\": "src/"
         }
     },
     "suggest": {
@@ -23,7 +23,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "0.2-dev"
         }
     }
 }
