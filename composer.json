@@ -19,7 +19,7 @@
         },
     },
     "suggest": {
-         "symfony/http-foundation": "To use the Request object instead of globals",
+         "symfony/http-foundation": "To use the Request object instead of globals"
     },
     "extra": {
         "branch-alias": {
