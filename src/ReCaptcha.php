@@ -14,6 +14,7 @@ class ReCaptcha {
 
     /** @var string URL to retrieve the verification from */
     protected $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+    protected $scriptUrl = "//www.google.com/recaptcha/api.js";
 
     /** @var array Error messages from https://developers.google.com/recaptcha/docs/verify */
     protected $errorMessages = array(
@@ -27,13 +28,22 @@ class ReCaptcha {
     protected $siteKey;
     protected $secret;
 
+    /** @var string The language code, see https://developers.google.com/recaptcha/docs/language */
+    protected $lang;
+
     /** @var array Errors when available */
     protected $errors = array();
 
-    public function __construct($siteKey, $secret)
+    /**
+     * @param  string $siteKey
+     * @param  string $secret
+     * @param  string $lang
+     */
+    public function __construct($siteKey, $secret, $lang = 'en')
     {
         $this->siteKey = $siteKey;
         $this->secret = $secret;
+        $this->lang = $lang;
     }
 
     /**
@@ -55,33 +65,59 @@ class ReCaptcha {
     {
         return $this->secret;
     }
+
+    /**
+     * Get the language
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
     /*
      * Get the script to include.
      *
-     * @param  string $hl
      * @param  string $render
      * @param  string $onload
      * @return string
      */
-    public function getScript($hl = 'en', $render = 'onload', $onload = null)
+    public function getScript($render = null, $onload = null)
+    {
+        $src = $this->getScriptSrc($render, $onload);
+        return sprintf('<script type="text/javascript" src="%s"></script>', $src);
+    }
+
+    /*
+     * Get the url from the script.
+     *
+     * @param  string $render
+     * @param  string $onload
+     * @return string
+     */
+    public function getScriptSrc($render = null, $onload = null)
     {
         $params = array(
-            'hl' => $hl,
-            'render' => $render
+            'hl' => $this->lang,
         );
+
+        if ($render) {
+            $params['render'] = $render;
+        }
 
         if ($onload) {
             $params['onload'] = $onload;
         }
 
-        $qs = http_build_query($params);
-
-        return sprintf('<script type="text/javascript" src="//www.google.com/recaptcha/api.js?%s"></script>', $qs);
+        return $this->scriptUrl . '?' . http_build_query($params);
     }
 
     /**
      * Get the captcha code for the form
      *
+     * @param  string $theme
+     * @param  string $type
      * @return string
      */
     public function getWidget($theme = 'light', $type = 'image')
