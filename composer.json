@@ -1,0 +1,29 @@
+{
+    "name": "fruitcakestudio/recaptcha",
+    "description": "reCAPTCHA library",
+    "keywords": ["reCAPTCHA", "captcha", "no captcha", "nocaptcha", "spam"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fruitcake Studio",
+            "homepage": "http://fruitcakestudio.com"
+        },
+        {
+            "name": "Barry vd. Heuvel",
+            "email": "barryvdh@gmail.com"
+        }
+    ],
+    "autoload": {
+         "psr-4": {
+            "FruitcakeStudio\\": "src/"
+        },
+    },
+    "suggest": {
+         "symfony/http-foundation": "To use the Request object instead of globals",
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
