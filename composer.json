@@ -14,9 +14,9 @@
         }
     ],
     "autoload": {
-         "psr-4": {
+        "psr-4": {
             "FruitcakeStudio\\": "src/"
-        },
+        }
     },
     "suggest": {
          "symfony/http-foundation": "To use the Request object instead of globals"
