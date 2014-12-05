@@ -78,6 +78,16 @@ class ReCaptcha {
     {
         return $this->lang;
     }
+    
+    /**
+     * Set the language
+     *
+     * @param string $lang
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+    }
 
     /**
      * Set the Request to use in the verifyRequest() call
