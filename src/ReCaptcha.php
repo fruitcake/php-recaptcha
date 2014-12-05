@@ -14,7 +14,7 @@ class ReCaptcha {
 
     /** @var string URL to retrieve the verification from */
     protected $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
-    protected $scriptUrl = "//www.google.com/recaptcha/api.js";
+    protected $scriptUrl = "https://www.google.com/recaptcha/api.js";
 
     /** @var array Error messages from https://developers.google.com/recaptcha/docs/verify */
     protected $errorMessages = array(
