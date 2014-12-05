@@ -40,10 +40,7 @@ class ServiceProvider extends BaseServiceProvider {
             }
         );
         
-        $app['validator']->extend('recaptcha', function($attribute, $value, $parameters) use ($app) {
-                $remoteip = $app['request']->getClientIp();
-                return $app['recaptcha']->verify($value, $remoteip);
-            });
+
     }
 
     /**
@@ -51,7 +48,13 @@ class ServiceProvider extends BaseServiceProvider {
      */
     public function boot()
     {
-        $this->app['config']->package('fruitcakestudio/recaptcha', __DIR__ . '/../../config');
+        $app = $this->app;
+        $app['config']->package('fruitcakestudio/recaptcha', __DIR__ . '/../../config');
+
+        $app['validator']->extend('recaptcha', function($attribute, $value, $parameters) use ($app) {
+                $remoteip = $app['request']->getClientIp();
+                return $app['recaptcha']->verify($value, $remoteip);
+            });
     }
 
     /**
