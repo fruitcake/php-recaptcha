@@ -237,10 +237,6 @@ class ReCaptcha {
      */
     protected function fetchResponse($params)
     {
-        foreach($params as &$param){
-            $param = urlencode($param);
-        }
-
         $qs = http_build_query($params);
         $response = file_get_contents($this->verifyUrl . '?' . $qs);
 
