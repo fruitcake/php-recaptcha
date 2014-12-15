@@ -1,7 +1,7 @@
 {
     "name": "fruitcakestudio/recaptcha",
     "description": "reCAPTCHA library",
-    "keywords": ["reCAPTCHA", "captcha", "no captcha", "nocaptcha", "spam", "laravel"],
+    "keywords": ["reCAPTCHA", "captcha", "no captcha", "nocaptcha", "spam"],
     "license": "MIT",
     "authors": [
         {
@@ -18,13 +18,9 @@
             "FruitcakeStudio\\ReCaptcha\\": "src/"
         }
     },
-    "require-dev": {
-        "symfony/http-foundation": "~2.3",
-        "laravel/support": "~4.0"
-    },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.2-dev"
+            "dev-master": "0.3-dev"
         }
     }
 }
