@@ -42,7 +42,7 @@ class ReCaptcha {
      * @param  string $secret
      * @param  string $lang
      */
-    public function __construct($siteKey, $secret, $lang = 'en')
+    public function __construct($siteKey, $secret, $lang = null)
     {
         $this->siteKey = $siteKey;
         $this->secret = $secret;
@@ -78,7 +78,7 @@ class ReCaptcha {
     {
         return $this->lang;
     }
-    
+
     /**
      * Set the language
      *
@@ -91,7 +91,7 @@ class ReCaptcha {
 
     /**
      * Set the Request to use in the verifyRequest() call
-     * 
+     *
      * @param Request $request
      */
     public function setRequest(Request $request)
@@ -123,17 +123,12 @@ class ReCaptcha {
     {
         $params = array(
             'hl' => $this->lang,
+            'render' => $render,
+            'onload' => $onload,
         );
 
-        if ($render) {
-            $params['render'] = $render;
-        }
-
-        if ($onload) {
-            $params['onload'] = $onload;
-        }
-
-        return $this->scriptUrl . '?' . http_build_query($params);
+        $qs = http_build_query($params);
+        return $this->scriptUrl . ($qs ? '?' . $qs : '');
     }
 
     /**
@@ -160,11 +155,8 @@ class ReCaptcha {
         $params = array(
             'secret' => $this->secret,
             'response' => $response,
+            'remoteip' => $remoteip,
         );
-
-        if ($remoteip) {
-            $params['remoteip'] = $remoteip;
-        }
 
         $response = $this->fetchResponse($params);
 
