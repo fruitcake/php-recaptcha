@@ -142,7 +142,29 @@ class ReCaptcha {
     {
         return sprintf('<div class="g-recaptcha" data-sitekey="%s" data-theme="%s" data-type="%s"></div>', $this->siteKey, $theme, $type);
     }
+    
+    /**
+     * Render a button for the invisible captcha
+     *
+     * @param $formId
+     * @param string $buttonLabel
+     * @param string $buttonClass
+     * @return string
+     */
+    public function getInvisibleWidget($formId, $buttonLabel = 'Submit', $buttonClass ='')
+    {
+        $hash = md5(uniqid($formId, true));
 
+        return sprintf(
+'<script>
+       function onSubmit%s(token) {
+         document.getElementById("%s").submit();
+       }
+</script>
+<button class="g-recaptcha %s" data-sitekey="%s" data-callback=\'onSubmit%s\'>%s</button>
+', $hash, $formId, $buttonClass, $this->siteKey, $hash, $buttonLabel);
+    }
+    
     /**
      * Verify a response string
      *
